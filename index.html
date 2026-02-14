@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jiayi Line 🎀 My Universe</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;700&family=Ma+Shan+Zheng&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* =========================================
+           1. VARIABLES & RESET (CONFIGURACIÓN LUJO)
+           ========================================= */
+      :root {
+        --pink-pale: #fff0f5; /* Fondo suave */
+        --pink-light: #ffc2d4; /* Detalles claros */
+        --pink-main: #ff8fab; /* Rosa principal */
+        --pink-deep: #fb6f92; /* Rosa fuerte */
+        --gold: #d4af37; /* Oro para detalles lujo */
+        --text-dark: #4a4a4a; /* Texto legible */
+        --glass: rgba(255, 255, 255, 0.7); /* Efecto cristal */
+        --glass-border: rgba(255, 255, 255, 0.9);
+        --shadow: 0 10px 30px rgba(251, 111, 146, 0.15);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+
+      body {
+        font-family: "Lato", sans-serif;
+        background-color: var(--pink-pale);
+        color: var(--text-dark);
+        background-image:
+          radial-gradient(
+            circle at 10% 20%,
+            rgba(255, 255, 255, 0.4) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 90% 80%,
+            rgba(255, 194, 212, 0.4) 0%,
+            transparent 20%
+          );
+        background-attachment: fixed;
+      }
+
+      /* Scrollbar personalizada */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--pink-pale);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--pink-main);
+        border-radius: 5px;
+      }
+
+      /* =========================================
+           2. ANIMACIONES GENERALES
+           ========================================= */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes pulseGlow {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 143, 171, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 20px rgba(255, 143, 171, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 143, 171, 0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Clase para animar al hacer scroll con JS */
+      .reveal {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* =========================================
+           3. PRELOADER (PANTALLA DE CARGA)
+           ========================================= */
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 1s ease;
+      }
+      .loader-bow {
+        font-size: 4rem;
+        animation: float 1s infinite ease-in-out;
+      }
+      .loader-text {
+        font-family: "Playfair Display", serif;
+        margin-top: 10px;
+        color: var(--pink-deep);
+        letter-spacing: 2px;
+      }
+
+      /* =========================================
+           4. HERO SECTION (PORTADA)
+           ========================================= */
+      .hero {
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      /* Fondo Sakura animado */
+      .sakura-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+      .sakura {
+        position: absolute;
+        background: #ffc2d4;
+        border-radius: 100% 0 100% 0;
+        opacity: 0.7;
+        animation: fall linear infinite;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(100vh) rotate(720deg);
+        }
+      }
+
+      .hero-content {
+        z-index: 2;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(5px);
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        width: 400px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 50px rgba(255, 194, 212, 0.5);
+        animation: pulseGlow 3s infinite;
+      }
+
+      h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 3.5rem;
+        color: var(--pink-deep);
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+      .chinese-hero {
+        font-family: "Ma Shan Zheng", cursive;
+        font-size: 2.5rem;
+        color: var(--pink-main);
+        display: block;
+        margin-top: 5px;
+      }
+      .hero-subtitle {
+        font-family: "Great Vibes", cursive;
+        font-size: 1.8rem;
+        color: var(--gold);
+        margin-top: 10px;
+      }
+
+      .scroll-down {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2rem;
+        color: var(--pink-deep);
+        animation: float 2s infinite;
+        cursor: pointer;
+      }
+
+      /* =========================================
+           5. SECCIONES COMUNES
+           ========================================= */
+      .section {
+        padding: 100px 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+      }
+      .section-title {
+        text-align: center;
+        font-family: "Playfair Display", serif;
+        font-size: 2.5rem;
+        color: var(--text-dark);
+        margin-bottom: 60px;
+        position: relative;
+      }
+      .section-title::after {
+        content: "🎀";
+        display: block;
+        font-size: 1.5rem;
+        margin-top: 10px;
+      }
+
+      /* =========================================
+           6. PROFILE (LA MUSA)
+           ========================================= */
+      .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        flex-wrap: wrap;
+      }
+      .profile-img {
+        width: 300px;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 150px 150px 20px 20px;
+        box-shadow: 20px 20px 0 var(--pink-light);
+        border: 5px solid white;
+      }
+      .profile-info {
+        max-width: 400px;
+      }
+      .profile-info h3 {
+        font-size: 2rem;
+        color: var(--pink-deep);
+        margin-bottom: 20px;
+      }
+      .attribute {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+      }
+      .attribute i {
+        color: var(--gold);
+        margin-right: 15px;
+        font-size: 1.2rem;
+      }
+
+      /* =========================================
+           7. TIMELINE (HISTORIA)
+           ========================================= */
+      .timeline {
+        position: relative;
+        padding: 20px 0;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--pink-light);
+        transform: translateX(-50%);
+      }
+      .timeline-item {
+        margin-bottom: 50px;
+        position: relative;
+        width: 50%;
+        padding: 0 40px;
+      }
+      .timeline-item:nth-child(odd) {
+        left: 0;
+        text-align: right;
+      }
+      .timeline-item:nth-child(even) {
+        left: 50%;
+        text-align: left;
+      }
+
+      .timeline-dot {
+        position: absolute;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        background: var(--pink-deep);
+        border-radius: 50%;
+        border: 4px solid white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .timeline-item:nth-child(odd) .timeline-dot {
+        right: -10px;
+      }
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: -10px;
+      }
+
+      .timeline-content {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+        border-bottom: 4px solid var(--pink-main);
+        transition: transform 0.3s;
+      }
+      .timeline-content:hover {
+        transform: translateY(-5px);
+      }
+      .date-label {
+        font-weight: bold;
+        color: var(--pink-deep);
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* =========================================
+           8. CARDS "WHY I LOVE YOU"
+           ========================================= */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+      .love-card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: var(--shadow);
+        transition: 0.3s;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--pink-pale);
+      }
+      .love-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--pink-deep);
+      }
+      .card-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: var(--pink-main);
+      }
+      .love-card h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+      .love-card p {
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      /* =========================================
+           9. GALLERY (MOSAICO)
+           ========================================= */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 200px;
+        gap: 15px;
+      }
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.5s;
+      }
+      .gallery-item:hover img {
+        transform: scale(1.1);
+        filter: brightness(1.1);
+      }
+
+      /* Layout irregular para efecto moderno */
+      .gallery-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+      .gallery-item:nth-child(4) {
+        grid-column: span 2;
+      }
+      .gallery-item:nth-child(5) {
+        grid-row: span 2;
+      }
+
+      /* =========================================
+           10. MUSIC PLAYER
+           ========================================= */
+      .music-section {
+        text-align: center;
+      }
+      .player-ui {
+        background: white;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .album-art {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        background: #eee;
+        object-fit: cover;
+      }
+      .track-info {
+        text-align: left;
+        flex: 1;
+      }
+      .track-title {
+        font-weight: bold;
+        display: block;
+      }
+      .track-artist {
+        font-size: 0.8rem;
+        color: #888;
+      }
+      .play-btn {
+        width: 50px;
+        height: 50px;
+        background: var(--pink-deep);
+        border-radius: 50%;
+        color: white;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .play-btn:hover {
+        transform: scale(1.1);
+        background: var(--pink-main);
+      }
+
+      /* =========================================
+           11. GACHA GAME (REGALO)
+           ========================================= */
+      .gacha-container {
+        text-align: center;
+        background: white;
+        padding: 50px;
+        border-radius: 30px;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+      .gacha-machine {
+        width: 200px;
+        margin: 0 auto 30px;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .gacha-machine img {
+        width: 100%;
+      }
+      .gacha-machine:active {
+        transform: scale(0.95);
+      }
+
+      .prize-display {
+        display: none;
+        padding: 20px;
+        background: var(--pink-pale);
+        border: 2px dashed var(--pink-deep);
+        border-radius: 15px;
+        margin-top: 20px;
+        animation: fadeIn 0.5s;
+      }
+      .prize-code {
+        font-family: monospace;
+        font-size: 1.5rem;
+        letter-spacing: 3px;
+        font-weight: bold;
+        color: var(--pink-deep);
+        background: white;
+        padding: 5px 15px;
+        border-radius: 5px;
+        margin-top: 10px;
+        display: inline-block;
+      }
+
+      /* =========================================
+           12. TYPEWRITER LETTER (CARTA)
+           ========================================= */
+      .letter-container {
+        background: #fff;
+        padding: 60px 40px;
+        max-width: 700px;
+        margin: 0 auto;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        font-family: "Playfair Display", serif;
+        font-size: 1.2rem;
+        line-height: 1.8;
+        background-image: linear-gradient(#e1e1e1 1px, transparent 1px);
+        background-size: 100% 2em; /* Rayas de papel */
+        position: relative;
+      }
+      .letter-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://www.transparenttextures.com/patterns/paper.png");
+        opacity: 0.5;
+      }
+      #typewriter {
+        white-space: pre-wrap;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* =========================================
+           13. FOOTER
+           ========================================= */
+      footer {
+        text-align: center;
+        padding: 50px 20px;
+        background: white;
+        margin-top: 100px;
+        border-top: 5px solid var(--pink-pale);
+      }
+      .heart-icon {
+        color: red;
+        animation: beat 1s infinite;
+        display: inline-block;
+      }
+      @keyframes beat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.3);
+        }
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+        .timeline::before {
+          left: 20px;
+        }
+        .timeline-item {
+          width: 100%;
+          padding-left: 50px;
+          padding-right: 0;
+          text-align: left !important;
+        }
+        .timeline-item:nth-child(even) {
+          left: 0;
+        }
+        .timeline-dot {
+          left: 10px !important;
+        }
+        .profile-container {
+          flex-direction: column;
+          text-align: center;
+        }
+        .profile-info {
+          text-align: left;
+        }
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .gallery-item:nth-child(1) {
+          grid-column: span 1;
+          grid-row: span 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="preloader">
+      <div class="loader-bow">🎀</div>
+      <div class="loader-text">Preparando el universo de Jiayi...</div>
+    </div>
+
+    <audio id="bg-music" loop>
+      <source src="music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="sakura-rain" class="sakura-container"></div>
+
+    <header class="hero">
+      <div class="hero-content">
+        <span class="chinese-hero">嘉怡</span>
+        <h1>Jiayi Line</h1>
+        <p class="hero-subtitle">My Hello Kitty, My Love.</p>
+      </div>
+      <div class="scroll-down" onclick="scrollToSection('profile')">
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </header>
+
+    <section id="profile" class="section reveal">
+      <h2 class="section-title">La Protagonista</h2>
+      <div class="profile-container">
+        <img src="intro.jpeg" alt="Jiayi Beautiful" class="profile-img" />
+
+        <div class="profile-info">
+          <h3>
+            Jiayi Lin
+            <span style="font-size: 1rem; opacity: 0.6">(21 años)</span>
+          </h3>
+          <p style="margin-bottom: 20px; line-height: 1.6">
+            La mujer más increíble que ha cruzado mi camino. Una armonía
+            perfecta entre elegancia y sensibilidad, entre ternura y carácter.
+            Ama el rosa no como un color, sino como una forma de ver la vida;
+            entiende el mundo de Hello Kitty como pocos, y sin darse cuenta, se
+            convirtió en el lugar donde mi corazón descansa.
+          </p>
+
+          <div class="attribute">
+            <i class="fa-solid fa-crown"></i> La Más Preciosa
+          </div>
+          <div class="attribute">
+            <i class="fa-solid fa-cat"></i> Hello Kitty Lover😁
+          </div>
+          <div class="attribute">
+            <i class="fa-solid fa-heart"></i> La Que me Saca de los esquizos😒
+          </div>
+          <div class="attribute">
+            <i class="fa-solid fa-location-dot"></i> 你和我，永远在一起
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <h2 class="section-title">
+        Nuestra Historia
+        <span style="font-family: &quot;Ma Shan Zheng&quot;">我们的故事</span>
+      </h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="date-label">El Inicio</span>
+            <h3>Nuestra conexion</h3>
+            <p>
+              Desde el primer momento, supe que ibas a ser la mujer de mi vida ,
+              y si tengo que hacerlo lo volveria a hacer una y otra vez. Y
+              siempre te voy a querer siempre , y que ese amor sea siempre más
+              fuerte que todo y que nada se ponga en contra de nosotros.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="date-label">El aprendizaje contigo</span>
+            <h3>Nuestro crecimiento juntos</h3>
+            <p>
+              Contigo aprendi a ser mejor y a siempre dar lo mejor de mi ,y
+              gracias por ayudarme a cambiar mis defectos, y a ayudarme a crecer
+              como persona y como hombre.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="date-label">Nuestro amor</span>
+            <h3>Viviendo un Sueño con la mujer de mi vida</h3>
+            <p>
+              La verdad no esperaba vivir un amor tan fuerte como lo nuestro, y
+              doy la gracia a Dios por haberte puesto en mi camino, y por ser el
+              amor de mi vida, quiero que nunca dudes de mi amor hacia ti y por
+              siempre te quiero.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="date-label">Futuro</span>
+            <h3>Para Siempre</h3>
+            <p>
+              Esto es solo el comienzo. Haremos cosas más grande y creo en
+              nosotros.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <h2 class="section-title">Por qué te amo</h2>
+      <div class="cards-grid">
+        <div class="love-card">
+          <div class="card-icon">👀</div>
+          <h4>Tu Mirada</h4>
+          <p>La forma en que me miras hace que el mundo se detenga .</p>
+        </div>
+        <div class="love-card">
+          <div class="card-icon">🎀</div>
+          <h4>Tu Estilo</h4>
+          <p>Uff ni te imaginas que detallista eres bebe jajajaj.</p>
+        </div>
+        <div class="love-card">
+          <div class="card-icon">💪</div>
+          <h4>Tu Fuerza</h4>
+          <p>
+            A pesar de todo, siempre sigues adelante nunca te dejas por vencida
+            y te admiro mucho eres una mujer fuerte </p>
+            <i class="fa fa-user-times" aria-hidden="true"></i>.
+          </p>
+        </div>
+        <div class="love-card">
+          <div class="card-icon">🥰</div>
+          <h4>Tu Risa</h4>
+          <p>Es mi sonido favorito. Haría cualquier cosa por escucharla.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <h1>Aqui un poco de nuestras fotos</h1>
+      <h2 class="section-title">Museum of Us 📸</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="WhatsApp Image 2026-02-01 at 00.31.16.jpeg" alt="Memory" />
+        </div>
+        <div class="gallery-item">
+          <img
+            src="WhatsApp Image 2026-02-01 at 00.31.17 (1).jpeg"
+            alt="Memory"
+          />
+        </div>
+        <div class="gallery-item">
+          <img
+            src="WhatsApp Image 2026-02-01 at 00.31.17 (2).jpeg"
+            alt="Memory"
+          />
+        </div>
+        <div class="gallery-item">
+          <img
+            src="WhatsApp Image 2026-02-01 at 00.31.17 (3).jpeg"
+            alt="Memory"
+          />
+        </div>
+        <div class="gallery-item">
+          <img
+            src="WhatsApp Image 2026-02-01 at 00.31.17 (4).jpeg"
+            alt="Memory"
+          />
+        </div>
+        <div class="gallery-item">
+          <img
+            src="WhatsApp Image 2026-02-01 at 00.31.17 (5).jpeg"
+            alt="Memory"
+          />
+        </div>
+        <div class="gallery-item">
+          <img
+            src="WhatsApp Image 2026-02-01 at 00.31.17 (6).jpeg"
+            alt="Memory"
+          />
+        </div>
+        <div class="gallery-item">
+          <img src="WhatsApp Image 2026-02-01 at 00.31.17.jpeg" alt="Memory" />
+        </div>
+
+        <div class="gallery-item">
+          <img
+            src="WhatsApp Image 2026-02-01 at 00.31.17 (7).jpeg"
+            alt="Memory"
+          />
+        </div>
+
+        <div class="gallery-item">
+          <img
+            src="WhatsApp Image 2026-02-01 at 00.31.18 (1).jpeg"
+            alt="Memory"
+          />
+        </div>
+
+        <div class="gallery-item">
+          <img src="WhatsApp Image 2026-02-01 at 00.31.18.jpeg" alt="Memory" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <h2 class="section-title">Cada Momento Contigo 💖</h2>
+
+      <div class="love-message">
+        <img
+          src="WhatsApp Image 2026-02-01 at 00.31.18 (2).jpeg"
+          alt="Nosotros"
+          class="album-art"
+        />
+
+        <div class="track-info">
+          <span class="track-title">
+            No existe un solo recuerdo favorito,
+          </span>
+          <span class="track-artist">
+            porque cada instante a tu lado es único, especial e irrepetible.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <h2 class="section-title">Tu Regalo Sorpresa 🎁</h2>
+      <p style="text-align: center; margin-bottom: 30px">
+        Toca la máquina de Hello Kitty para ver qué ganas hoy...
+      </p>
+
+      <div class="gacha-container">
+        <div class="gacha-machine" onclick="playGacha()">
+          <div style="font-size: 8rem">🎰</div>
+        </div>
+
+        <div id="prize-result" class="prize-display">
+          <h3 id="prize-text" style="color: var(--pink-deep)">Ganaste...</h3>
+          <p id="prize-desc-text">Descripción</p>
+          <div class="prize-code" id="prize-code-text">CODE</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <h2 class="section-title">Una Carta para Ti 💌</h2>
+      <div class="letter-container">
+        <div id="typewriter"></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        Hecho con <span class="heart-icon">❤️</span> y código , no ha sido facil
+        bebe jajaja espero que te guste queria hacer algo differente y he hecho
+        eso ya cuando te veré tendras tú regalo feliz dia de San valentin.
+      </p>
+      <p>Para mi bebe <strong>Jiayi Lin  </strong>.</p>
+      <p
+        style="
+          font-family: &quot;Ma Shan Zheng&quot;;
+          font-size: 1.2rem;
+          margin-top: 10px;
+        "
+      >
+        我爱你 (Te Amo)
+      </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+      /* =========================================
+           LOGICA JAVASCRIPT
+           ========================================= */
+
+      // 1. PRELOADER
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.getElementById("preloader").style.opacity = "0";
+          setTimeout(() => {
+            document.getElementById("preloader").style.display = "none";
+          }, 1000);
+        }, 2000);
+      });
+
+      // 2. SAKURA RAIN (Pétalos cayendo)
+      function createSakura() {
+        const container = document.getElementById("sakura-rain");
+        const petal = document.createElement("div");
+        petal.classList.add("sakura");
+
+        const size = Math.random() * 10 + 5;
+        petal.style.width = `${size}px`;
+        petal.style.height = `${size}px`;
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.animationDuration = Math.random() * 3 + 5 + "s";
+
+        container.appendChild(petal);
+        setTimeout(() => petal.remove(), 8000);
+      }
+      setInterval(createSakura, 300);
+
+      // 3. SCROLL REVEAL (Aparecer al bajar)
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+      }
+
+      // 4. MUSIC PLAYER
+      const audio = document.getElementById("bg-music");
+      const playIcon = document.getElementById("play-icon");
+      let isPlaying = false;
+
+      function toggleMusic() {
+        if (isPlaying) {
+          audio.pause();
+          playIcon.classList.remove("fa-pause");
+          playIcon.classList.add("fa-play");
+        } else {
+          audio.play();
+          playIcon.classList.remove("fa-play");
+          playIcon.classList.add("fa-pause");
+        }
+        isPlaying = !isPlaying;
+      }
+
+      // 5. GACHA GAME
+      const prizes = [
+        {
+          title: "Deseo Libre ",
+          desc: "Pide lo que quieras...",
+          code: "WILDCARD",
+        },
+      ];
+
+      function playGacha() {
+        // Confeti
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ["#ff8fab", "#fff", "#d4af37"],
+        });
+
+        const prize = prizes[Math.floor(Math.random() * prizes.length)];
+        const display = document.getElementById("prize-result");
+
+        display.style.display = "none"; // Reset
+        setTimeout(() => {
+          document.getElementById("prize-text").innerText = prize.title;
+          document.getElementById("prize-desc-text").innerText = prize.desc;
+          document.getElementById("prize-code-text").innerText = prize.code;
+          display.style.display = "block";
+        }, 200);
+      }
+
+      // 6. TYPEWRITER EFFECT (La Carta)
+      const text = `Mi querida Jiayi Feliz dia de  Valentin,\n\n
+Estar a tu lado no es solo una alegría, es una certeza.\n
+Desde que llegaste a mi vida, todo empezó a tener un sentido más verdadero, más profundo.\n
+Eres mi calma cuando el mundo pesa, mi fuerza cuando dudo y mi luz cuando busco el camino.\n\n
+Te amo no solo por quien eres, sino por quien me ayudas a ser cada día.\n
+Contigo quiero crecer, mejorar, y convertirme en un hombre digno de tu amor: un compañero leal, un amigo sincero y un padre presente y lleno de amor para los hijos que la vida nos regale.\n\n
+Te prometo elegirte cada día, incluso en los momentos difíciles, incluso en el silencio.\n
+Prometo cuidarte, respetarte, hacerte reír y amarte con paciencia, verdad y profundidad.\n\n
+Mi corazón es tuyo hoy y siempre.\n\n
+Siempre tuyo,\n
+Nouhou Ismael Akapo`;
+
+      const typewriterElement = document.getElementById("typewriter");
+      let i = 0;
+
+      // Usamos Intersection Observer para empezar a escribir solo cuando llegue a la sección
+      const letterObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && i === 0) {
+          typeWriter();
+        }
+      });
+      letterObserver.observe(document.querySelector(".letter-container"));
+
+      function typeWriter() {
+        if (i < text.length) {
+          typewriterElement.innerHTML +=
+            text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 50);
+        }
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
